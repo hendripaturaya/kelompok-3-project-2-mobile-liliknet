@@ -28,3 +28,26 @@
 - [Image Picker](https://pub.dev/packages/image_picker)
 
 ## 📂 Struktur Folder (Ringkasan)
+
+lib/
+├── core/ # Konstanta, tema, utilitas umum
+├── features/ # Halaman utama aplikasi (Login, Register, Tagihan, dll.)
+├── routes/ # Konfigurasi rute dan navigasi
+├── services/ # Layanan HTTP dan API
+└── main.dart # Titik masuk utama aplikasi
+
+## ⚙️ Cara Menjalankan Aplikasi
+
+1. Clone proyek ini:
+   ```bash
+   git clone https://github.com/username/liliknet_mobile.git
+   cd liliknet_mobile
+2. flutter pub get
+3. flutter run
+   
+## Jika ingin menghasilkan file .apk:
+flutter build apk --release
+
+## 👨‍💻 Pengembang
+Aplikasi ini dikembangkan oleh:
+Hendri Paturaya
