@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:liliknet_mobile/presentation/screens/tagihan_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'home_screen.dart';
-import 'settings_screen.dart';
+import 'tagihan_screen.dart';
 import 'paket_screen.dart';
+import 'settings_screen.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+  final int initialIndex;
+
+  const MainScreen({super.key, this.initialIndex = 0}); // default ke tab 0
 
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _currentIndex = 3; // 3 berarti default di tab Pengaturan
+  late int _currentIndex;
 
   final List<Widget> _screens = [
     HomeScreen(),
@@ -20,6 +23,12 @@ class _MainScreenState extends State<MainScreen> {
     PaketScreen(),
     SettingsScreen(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _currentIndex = widget.initialIndex;
+  }
 
   void _onTabTapped(int index) {
     setState(() {
@@ -38,25 +47,12 @@ class _MainScreenState extends State<MainScreen> {
         unselectedItemColor: Colors.grey,
         type: BottomNavigationBarType.fixed,
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Beranda',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.receipt_long),
-            label: 'Tagihan',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.wifi),
-            label: 'Paket',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Pengaturan',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Beranda'),
+          BottomNavigationBarItem(icon: Icon(Icons.receipt_long), label: 'Tagihan'),
+          BottomNavigationBarItem(icon: Icon(Icons.wifi), label: 'Paket'),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Pengaturan'),
         ],
       ),
     );
   }
 }
-   

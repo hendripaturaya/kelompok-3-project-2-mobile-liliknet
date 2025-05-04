@@ -20,8 +20,9 @@ class PaketAktifScreen extends StatelessWidget {
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
         ),
+        backgroundColor: Colors.blueAccent,
       ),
-      body: SingleChildScrollView( // Membuat konten bisa digulir jika melebihi batas layar
+      body: SingleChildScrollView( 
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,60 +32,91 @@ class PaketAktifScreen extends StatelessWidget {
               style: TextStyle(
                 fontSize: 24, 
                 fontWeight: FontWeight.bold, 
-                color: Colors.blueAccent
+                color: Colors.blueAccent,
               ),
             ),
             const SizedBox(height: 16),
             
-            // Menampilkan informasi paket WiFi aktif dalam Card untuk tampilan lebih menarik
+            // Card dengan gambar dan bayangan
             Card(
-              elevation: 8, // Memberikan bayangan pada Card
+              elevation: 8,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(16),
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    PaketInfoWidget(
-                      label: 'Nama Paket',
-                      value: paket['nama'] ?? 'Tidak tersedia',
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Colors.blueAccent, Colors.blue.shade400],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
                     ),
-                    PaketInfoWidget(
-                      label: 'Tanggal Mulai',
-                      value: paket['tanggalMulai'] ?? 'Tidak tersedia',
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        PaketInfoWidget(
+                          label: 'Nama Paket',
+                          value: paket['nama'] ?? 'Tidak tersedia',
+                        ),
+                        PaketInfoWidget(
+                          label: 'Tanggal Mulai',
+                          value: paket['tanggalMulai'] ?? 'Tidak tersedia',
+                        ),
+                        PaketInfoWidget(
+                          label: 'Tanggal Akhir',
+                          value: paket['tanggalAkhir'] ?? 'Tidak tersedia',
+                        ),
+                        PaketInfoWidget(
+                          label: 'Status',
+                          value: paket['status'] ?? 'Tidak tersedia',
+                        ),
+                      ],
                     ),
-                    PaketInfoWidget(
-                      label: 'Tanggal Akhir',
-                      value: paket['tanggalAkhir'] ?? 'Tidak tersedia',
-                    ),
-                    PaketInfoWidget(
-                      label: 'Status',
-                      value: paket['status'] ?? 'Tidak tersedia',
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),
             const SizedBox(height: 24),
 
-            // Tombol untuk menonaktifkan paket dengan gradien
+            // Tombol dengan animasi dan gradien
             Center(
-              child: ElevatedButton(
-                onPressed: () {
+              child: GestureDetector(
+                onTap: () {
                   // Tindakan untuk menonaktifkan paket
                 },
-                child: const Text(
-                  'Nonaktifkan Paket',
-                  style: TextStyle(fontSize: 16),
-                ),
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0), 
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  width: 200,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Colors.orange, Colors.redAccent],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: BorderRadius.circular(30),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black26,
+                        offset: Offset(0, 4),
+                        blurRadius: 4,
+                      ),
+                    ],
                   ),
-                  textStyle: const TextStyle(fontWeight: FontWeight.bold),
+                  child: Center(
+                    child: const Text(
+                      'Nonaktifkan Paket',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -110,15 +142,19 @@ class PaketInfoWidget extends StatelessWidget {
           Text(
             '$label: ',
             style: const TextStyle(
-              fontWeight: FontWeight.bold, 
-              color: Colors.blueGrey
+              fontWeight: FontWeight.bold,
+              color: Colors.blueGrey,
+              fontSize: 16,
             ),
           ),
-          Expanded(  // Agar text tidak overflow
+          Expanded( 
             child: Text(
               value,
               overflow: TextOverflow.ellipsis,
-              style: const TextStyle(color: Colors.black54),
+              style: const TextStyle(
+                color: Colors.black87,
+                fontSize: 16,
+              ),
             ),
           ),
         ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../routes/app_routes.dart';
+import 'main_screen.dart'; // pastikan ini sudah diimport
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -25,19 +26,23 @@ class _LoginScreenState extends State<LoginScreen> {
     try {
       if (_usernameController.text == correctUsername &&
           _passwordController.text == correctPassword) {
-        // Contoh: Simulasi respons API
+        // Simulasi respons API
         final response = {
           'message': 'Login berhasil!',
           'token': 'dummy_token',
         };
 
         if (response['message'] == 'Login berhasil!') {
-          // Simpan token
           final prefs = await SharedPreferences.getInstance();
-          prefs.setString('token', response['token']!);
+          await prefs.setString('token', response['token']!);
 
-          // Navigasi ke MainScreen
-          Navigator.pushReplacementNamed(context, AppRoutes.main);
+          // Arahkan ke MainScreen dan ke tab "Beranda"
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (_) => const MainScreen(initialIndex: 0),
+            ),
+          );
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Username atau password salah')),

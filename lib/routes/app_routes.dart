@@ -10,6 +10,7 @@ import '../presentation/screens/paket_aktif_screen.dart';
 import '../presentation/screens/langganan_screen.dart';
 import '../presentation/screens/tagihan_screen.dart';
 import '../presentation/screens/riwayat_tagihan_screen.dart';
+import '../presentation/screens/edit_profile_screen.dart';
 
 // Tambahkan import screen lainnya jika perlu
 
@@ -21,6 +22,7 @@ class AppRoutes {
   static const String settingsRoute = '/settings';
   static const String main = '/main';
   static const String paket = '/paket';
+  static const String editProfile = '/edit-profile';
 
   // Rute tambahan
   static const String paketAktif = '/paket-aktif';
@@ -54,7 +56,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => TagihanScreen());
       case riwayatTagihan:
         return MaterialPageRoute(builder: (_) => RiwayatTagihanScreen());
-
+      case editProfile:
+        return MaterialPageRoute(builder: (_) => const EditProfileScreen());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
