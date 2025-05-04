@@ -11,14 +11,14 @@ import '../presentation/screens/langganan_screen.dart';
 import '../presentation/screens/tagihan_screen.dart';
 import '../presentation/screens/riwayat_tagihan_screen.dart';
 import '../presentation/screens/edit_profile_screen.dart';
-
-// Tambahkan import screen lainnya jika perlu
+import '../presentation/screens/logout_screen.dart';
 
 class AppRoutes {
   static const String splash = '/';
   static const String login = '/login';
   static const String register = '/register';
   static const String home = '/home';
+  static const String logout = '/logout';
   static const String settingsRoute = '/settings';
   static const String main = '/main';
   static const String paket = '/paket';
@@ -46,8 +46,6 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const MainScreen());
       case paket:
         return MaterialPageRoute(builder: (_) => PaketScreen());
-
-      // Rute tambahan
       case paketAktif:
         return MaterialPageRoute(builder: (_) => PaketAktifScreen());
       case langganan:
@@ -58,6 +56,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => RiwayatTagihanScreen());
       case editProfile:
         return MaterialPageRoute(builder: (_) => const EditProfileScreen());
+      case logout:
+        return MaterialPageRoute(builder: (_) => const LogoutScreen()); // ✅ Tambahkan ini
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../routes/app_routes.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -106,17 +105,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
       leading: const Icon(Icons.logout),
       title: const Text('Keluar'),
       trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-      onTap: () async {
-        // Hapus token dari SharedPreferences (opsional)
-        final prefs = await SharedPreferences.getInstance();
-        await prefs.remove('token');
-
-        // Navigasi ke halaman login dan hapus semua stack sebelumnya
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          AppRoutes.login,
-          (route) => false,
-        );
+      onTap: () {
+        Navigator.pushNamed(context, AppRoutes.logout); // Arahkan ke LogoutScreen
       },
     );
   }
