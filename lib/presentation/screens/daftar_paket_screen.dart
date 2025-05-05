@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../models/paket.dart'; // Import model Paket
 import '../../../models/pelanggan.dart'; // Import model Pelanggan
-import '../../../services/api_service.dart'; // Import API Service
+import '../../services/pelanggan_api_service.dart'; // Menggunakan PelangganApiService
 
 class DaftarPaketScreen extends StatefulWidget {
   final Paket paket; // Paket yang dipilih oleh user
@@ -31,6 +31,7 @@ class _DaftarPaketScreenState extends State<DaftarPaketScreen> {
     harga = widget.paket.harga;  // Mengatur harga paket
   }
 
+  // Fungsi untuk mengirimkan data ke server
   void _submitForm() async {
     if (_formKey.currentState!.validate()) {
       // Membuat objek pelanggan dari data form
@@ -43,8 +44,8 @@ class _DaftarPaketScreenState extends State<DaftarPaketScreen> {
         harga: harga,
       );
 
-      // Kirim data pelanggan ke API
-      bool success = await ApiService.registerPelanggan(pelanggan);
+      // Kirim data pelanggan ke API menggunakan PelangganApiService
+      bool success = await PelangganApiService.registerPelanggan(pelanggan);
 
       if (success) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -76,6 +77,8 @@ class _DaftarPaketScreenState extends State<DaftarPaketScreen> {
                 subtitle: Text('Harga: Rp $harga'),
               ),
               const SizedBox(height: 16),
+
+              // Field untuk Alamat
               TextFormField(
                 controller: _alamatController,
                 decoration: const InputDecoration(
@@ -90,6 +93,8 @@ class _DaftarPaketScreenState extends State<DaftarPaketScreen> {
                 },
               ),
               const SizedBox(height: 16),
+
+              // Field untuk Nomor Telepon
               TextFormField(
                 controller: _noTelponController,
                 decoration: const InputDecoration(
@@ -101,10 +106,16 @@ class _DaftarPaketScreenState extends State<DaftarPaketScreen> {
                   if (value == null || value.isEmpty) {
                     return 'Nomor telepon tidak boleh kosong';
                   }
+                  // Validasi nomor telepon (misalnya harus 10 digit)
+                  if (value.length != 10) {
+                    return 'Nomor telepon harus 10 digit';
+                  }
                   return null;
                 },
               ),
               const SizedBox(height: 16),
+
+              // Tombol Daftar
               ElevatedButton(
                 onPressed: _submitForm,
                 child: const Text('Daftar Paket'),

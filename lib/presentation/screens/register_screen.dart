@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';  // Tambahkan ini untuk TapGestureRecognizer
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../../services/api_service.dart';  // Pastikan API service sudah disesuaikan dengan API
+import '../../services/auth_api_service.dart';  // Menggunakan AuthApiService yang sudah disesuaikan
 import '../../routes/app_routes.dart';  // Ganti dengan path rute Anda
 
 class RegisterScreen extends StatefulWidget {
@@ -62,7 +62,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     }
 
     try {
-      final response = await ApiService.register(
+      final response = await AuthApiService.register(
         username,
         email,
         name,

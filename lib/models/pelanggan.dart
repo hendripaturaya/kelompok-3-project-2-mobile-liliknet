@@ -1,10 +1,10 @@
 class Pelanggan {
-  final String username;
-  final String namaPelanggan;
-  final String alamat;
-  final String noTelepon;
-  final String paket;
-  final String harga;
+  String username;
+  String namaPelanggan;
+  String alamat;
+  String noTelepon;
+  String paket;
+  String harga;
 
   Pelanggan({
     required this.username,
@@ -15,7 +15,7 @@ class Pelanggan {
     required this.harga,
   });
 
-  // Konversi objek Pelanggan menjadi JSON
+  // Method untuk mengonversi objek Pelanggan menjadi Map yang dapat dikirim dalam request body
   Map<String, dynamic> toJson() {
     return {
       'username': username,

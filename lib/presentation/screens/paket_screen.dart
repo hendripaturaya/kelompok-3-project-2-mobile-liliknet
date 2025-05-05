@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../models/paket.dart';
-import '../../../services/api_service.dart';
+import '../../services/paket_api_service.dart';  // Menggunakan PaketApiService yang sudah disesuaikan
 import 'daftar_paket_screen.dart';  // Import layar pendaftaran
 
 class PaketScreen extends StatefulWidget {
@@ -16,7 +16,7 @@ class _PaketScreenState extends State<PaketScreen> {
   @override
   void initState() {
     super.initState();
-    futurePaketList = ApiService.fetchPaketList();  // Memanggil API untuk mendapatkan daftar paket
+    futurePaketList = PaketApiService.fetchPaketList();  // Memanggil API untuk mendapatkan daftar paket dari PaketApiService
   }
 
   @override
