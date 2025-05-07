@@ -23,13 +23,7 @@ class _DaftarPaketScreenState extends State<DaftarPaketScreen> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController _alamatController = TextEditingController();
   TextEditingController _noTelponController = TextEditingController();
-  late String harga;
-
-  @override
-  void initState() {
-    super.initState();
-    harga = widget.paket.harga;  // Mengatur harga paket
-  }
+  TextEditingController _passwordController = TextEditingController();  // Controller untuk password
 
   // Fungsi untuk mengirimkan data ke server
   void _submitForm() async {
@@ -40,8 +34,10 @@ class _DaftarPaketScreenState extends State<DaftarPaketScreen> {
         namaPelanggan: widget.namaPelanggan,
         alamat: _alamatController.text,
         noTelepon: _noTelponController.text,
-        paket: widget.paket.nama,
-        harga: harga,
+        paket: widget.paket.nama,  // Mengambil nama paket
+        harga: widget.paket.harga,  // Mengambil harga paket
+        namaUser: widget.namaPelanggan,  // Menggunakan nama pelanggan sebagai nama_user
+        password: _passwordController.text,  // Mengambil password yang dimasukkan
       );
 
       // Kirim data pelanggan ke API menggunakan PelangganApiService
@@ -74,7 +70,7 @@ class _DaftarPaketScreenState extends State<DaftarPaketScreen> {
             children: [
               ListTile(
                 title: Text('Paket: ${widget.paket.nama}'),
-                subtitle: Text('Harga: Rp $harga'),
+                subtitle: Text('Harga: Rp ${widget.paket.harga}'),
               ),
               const SizedBox(height: 16),
 
@@ -107,8 +103,25 @@ class _DaftarPaketScreenState extends State<DaftarPaketScreen> {
                     return 'Nomor telepon tidak boleh kosong';
                   }
                   // Validasi nomor telepon (misalnya harus 10 digit)
-                  if (value.length != 10) {
+                  if (value.length != 12) {
                     return 'Nomor telepon harus 10 digit';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 16),
+
+              // Field untuk Password
+              TextFormField(
+                controller: _passwordController,
+                decoration: const InputDecoration(
+                  labelText: 'Password',
+                  border: OutlineInputBorder(),
+                ),
+                obscureText: true,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Password tidak boleh kosong';
                   }
                   return null;
                 },

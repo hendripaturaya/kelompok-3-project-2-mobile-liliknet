@@ -13,7 +13,6 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController = TextEditingController();
@@ -29,7 +28,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   void dispose() {
     _nameController.dispose();
-    _emailController.dispose();
     _usernameController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
@@ -44,7 +42,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     });
 
     final name = _nameController.text.trim();
-    final email = _emailController.text.trim();
     final username = _usernameController.text.trim();
     final password = _passwordController.text;
     final confirmPassword = _confirmPasswordController.text;
@@ -64,7 +61,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     try {
       final response = await AuthApiService.register(
         username,
-        email,
         name,
         password,
       );
@@ -128,17 +124,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 controller: _nameController,
                 decoration: const InputDecoration(
                   labelText: 'Nama Lengkap',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 16),
-
-              // Field Email
-              TextField(
-                controller: _emailController,
-                keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
-                  labelText: 'Email Address',
                   border: OutlineInputBorder(),
                 ),
               ),
