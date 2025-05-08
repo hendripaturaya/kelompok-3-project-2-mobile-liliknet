@@ -1,65 +1,30 @@
+// lib/screens/pembayaran_screen.dart
+
 import 'package:flutter/material.dart';
+import '../../../models/tagihan.dart';  // Pastikan model Tagihan diimport
 
 class PembayaranScreen extends StatelessWidget {
-  final Map<String, dynamic> tagihan;
+  final Tagihan tagihan;  // Parameter tagihan
 
-  const PembayaranScreen({super.key, required this.tagihan});
+  const PembayaranScreen({Key? key, required this.tagihan}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Pembayaran')),
-
-      body: Padding(
-        padding: const EdgeInsets.all(16),
+      appBar: AppBar(title: Text('Pembayaran Tagihan')),
+      body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'Detail Pembayaran',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 24),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text('Tanggal'),
-                Text(tagihan['tanggal']),
-              ],
-            ),
-            const SizedBox(height: 8),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text('Invoice ID'),
-                Text(tagihan['invoiceId']),
-              ],
-            ),
-            const SizedBox(height: 8),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text('Total'),
-                Text('Rp ${tagihan['total']}'),
-              ],
-            ),
-
-            const Spacer(),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  // Simulasikan proses pembayaran
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Pembayaran berhasil!')),
-                  );
-
-                  Navigator.pop(context, true); // Kirim status 'sudah dibayar'
-                },
-                child: const Text('Bayar Sekarang'),
-              ),
+            Text('Tagihan: ${tagihan.tanggal}', style: TextStyle(fontSize: 20)),
+            Text('Status: ${tagihan.status}', style: TextStyle(fontSize: 20)),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                // Menangani pembayaran, kembalikan hasil
+                Navigator.pop(context, true);
+              },
+              child: Text('Bayar'),
             ),
           ],
         ),
